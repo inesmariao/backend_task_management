@@ -39,7 +39,11 @@ async function bootstrap() {
    * Allows connections from the frontend and other origins as specified.
    */
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: [
+      'http://localhost:3000',
+      'https://task-management-inesmariao-h3begxamr.vercel.app',
+      'https://task-management-frontend-x0vf.onrender.com/tasks',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
