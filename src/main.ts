@@ -42,7 +42,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:3000',
       'https://task-management-inesmariao-h3begxamr.vercel.app',
-      'https://task-management-frontend-x0vf.onrender.com/tasks',
+      'https://task-management-frontend-x0vf.onrender.com',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
