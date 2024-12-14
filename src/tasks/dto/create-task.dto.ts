@@ -9,6 +9,7 @@ import {
   IsNumber,
 } from 'class-validator';
 import { TaskPriority } from '../tasks.schema';
+import { TaskStatus } from '../tasks.schema';
 
 /**
  * DTO for creating a new task.
@@ -29,6 +30,16 @@ export class CreateTaskDto {
   @IsString({ message: 'The description must be a valid string.' })
   @IsNotEmpty({ message: 'The description field is required.' })
   description!: string;
+
+  /**
+   * Status of the task.
+   * @example "pending"
+   */
+  @IsOptional()
+  @IsEnum(TaskStatus, {
+    message: 'Status must be one of: pending, in-progress, completed.',
+  })
+  status?: TaskStatus;
 
   /**
    * Person assignee for the task.
@@ -70,7 +81,7 @@ export class CreateTaskDto {
    */
   @IsOptional()
   @IsNumber({}, { message: 'Rating must be a number.' })
-  @Min(1, { message: 'Rating must be at least 1.' })
+  @Min(0, { message: 'Rating must be at least 0.' })
   @Max(5, { message: 'Rating cannot exceed 5.' })
   rating?: number;
 }

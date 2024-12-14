@@ -7,8 +7,10 @@ import {
   Max,
   IsNumber,
   IsNotEmpty,
+  IsBoolean
 } from 'class-validator';
 import { TaskPriority } from '../tasks.schema';
+import { TaskStatus } from '../tasks.schema';
 
 /**
  * DTO for updating an existing task.
@@ -37,10 +39,10 @@ export class UpdateTaskDto {
    * @example "pending"
    */
   @IsOptional()
-  @IsEnum(['pending', 'in-progress', 'completed'], {
+  @IsEnum(TaskStatus, {
     message: 'Status must be one of: pending, in-progress, completed.',
   })
-  status?: string;
+  status?: TaskStatus;
 
   /**
    * Person assignee for the task.
@@ -82,7 +84,16 @@ export class UpdateTaskDto {
    */
   @IsOptional()
   @IsNumber({}, { message: 'Rating must be a number.' })
-  @Min(1, { message: 'Rating must be at least 1.' })
+  @Min(0, { message: 'Rating must be at least 0.' })
   @Max(5, { message: 'Rating cannot exceed 5.' })
   rating?: number;
+
+  /**
+ * Logical deletion flag for the task.
+ * Indicates whether the task is marked as deleted.
+ * @example true
+ */
+  @IsOptional()
+  @IsBoolean({ message: 'The isDeleted field must be a boolean value.' })
+  isDeleted?: boolean;
 }

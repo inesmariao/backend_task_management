@@ -2,6 +2,8 @@
 
 This project is a REST API developed using **Node.js** and **NestJS** for managing tasks in a software development context. It includes features for task assignment, priority management, and tracking. The API leverages MongoDB for data persistence and provides endpoints for CRUD operations, including soft deletions and task restoration.
 
+Developed by **Ing. Inés María Oliveros**.
+
 ## Features
 
 - Manage tasks with attributes like title, description, assignee, priority, and deadlines.
@@ -16,7 +18,7 @@ Follow these steps to set up the project on your local machine:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/task-management-backend.git
+   git clone https://github.com/inesmariao/backend_task_management.git
    ```
 
 2. Navigate to the project directory:

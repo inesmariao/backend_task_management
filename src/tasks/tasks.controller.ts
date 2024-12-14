@@ -42,6 +42,16 @@ export class TasksController {
   }
 
   /**
+   * Retrieve all logically deleted tasks.
+   * @returns List of deleted tasks.
+   */
+  @Get('/deleted')
+  @ApiOperation({ summary: 'Retrieve all logically deleted tasks' })
+  @ApiResponse({ status: 200, description: 'List of deleted tasks.' })
+  async findDeleted() {
+    return this.tasksService.findDeleted();
+  }
+  /**
    * Retrieve a specific task by its ID.
    * @param id The ID of the task to retrieve.
    * @returns The requested task.
@@ -97,16 +107,5 @@ export class TasksController {
       message: 'The task was successfully restored.',
       task: restoredTask,
     };
-  }
-
-  /**
-   * Retrieve all logically deleted tasks.
-   * @returns List of deleted tasks.
-   */
-  @Get('/deleted')
-  @ApiOperation({ summary: 'Retrieve all logically deleted tasks' })
-  @ApiResponse({ status: 200, description: 'List of deleted tasks.' })
-  findDeleted() {
-    return this.tasksService.findDeleted();
   }
 }

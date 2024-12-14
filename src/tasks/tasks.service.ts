@@ -161,21 +161,22 @@ export class TasksService {
    */
   async restore(id: string): Promise<Task> {
     try {
-      const restoredTask = await this.taskModel
-        .findOneAndUpdate(
-          { _id: id, isDeleted: true },
-          { isDeleted: false },
-          { new: true }
-        )
-        .exec();
-
-      if (!restoredTask) {
+      const task = await this.taskModel.findOne({ _id: id }).exec();
+  
+      if (!task) {
+        throw new NotFoundException(`Task with ID "${id}" was not found or is not marked as deleted.`);
+      }
+  
+      if (!task.isDeleted) {
         throw new NotFoundException(
-          `Task with ID "${id}" was not found or is not marked as deleted.`
+          `Task with ID "${id}" is not marked as deleted. Current isDeleted: ${task.isDeleted}`
         );
       }
-
-      return restoredTask;
+  
+      task.isDeleted = false;
+      await task.save();
+  
+      return task;
     } catch (error) {
       const err = error as Error;
       Logger.error(
@@ -195,7 +196,8 @@ export class TasksService {
    */
   async findDeleted(): Promise<Task[]> {
     try {
-      return await this.taskModel.find({ isDeleted: true }).exec();
+      const tasks = await this.taskModel.find({ isDeleted: true }).exec();
+      return tasks;
     } catch (error) {
       const err = error as Error;
       Logger.error(
@@ -203,9 +205,7 @@ export class TasksService {
         err.stack,
         'TasksService'
       );
-      throw new Error(
-        'An error occurred while fetching deleted tasks. Please try again later.'
-      );
+      throw new Error('An error occurred while fetching deleted tasks.');
     }
   }
 }

@@ -124,10 +124,10 @@ export class Task {
   @ApiProperty({
     description: 'The rating of the task',
     example: 4,
-    minimum: 1,
+    minimum: 0,
     maximum: 5,
   })
-  @Prop({ required: false, min: 1, max: 5 })
+  @Prop({ required: false, min: 0, max: 5 })
   rating?: number;
 
   /**
