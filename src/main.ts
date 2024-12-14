@@ -36,14 +36,9 @@ async function bootstrap() {
 
   /**
    * Enable Cross-Origin Resource Sharing (CORS) for the application.
-   * Allows connections from the frontend and other origins as specified.
    */
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'https://task-management-inesmariao-h3begxamr.vercel.app',
-      'https://task-management-frontend-x0vf.onrender.com',
-    ],
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
