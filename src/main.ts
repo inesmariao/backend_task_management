@@ -38,20 +38,8 @@ async function bootstrap() {
    * Enable Cross-Origin Resource Sharing (CORS) for the application.
    */
   app.enableCors({
-    origin: (origin, callback) => {
-      const allowedOrigins = [
-        'http://localhost:3000',
-        'https://task-management-inesmariao-ccm1ys8xx.vercel.app',
-        'https://task-management-frontend-x0vf.onrender.com',
-      ];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('CORS policy violation: Origin not allowed.'));
-      }
-    },
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: false,
   });
 
   /**
