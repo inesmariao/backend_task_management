@@ -4,7 +4,17 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
+
   const app = await NestFactory.create(AppModule);
+
+  /**
+   * Enable Cross-Origin Resource Sharing (CORS) for the application.
+   */
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
+  });
 
   /**
    * Configure global validation pipes to handle request validation.
@@ -35,14 +45,6 @@ async function bootstrap() {
   );
 
   /**
-   * Enable Cross-Origin Resource Sharing (CORS) for the application.
-   */
-  app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  });
-
-  /**
    * Configure Swagger for API documentation.
    * - `setTitle`: Set the title of the API documentation.
    * - `setDescription`: Provide a description for the API.
@@ -58,7 +60,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 3000;
   await app.listen(port);
 }
 bootstrap();
