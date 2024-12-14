@@ -2,7 +2,7 @@
 
 This project is a REST API developed using **Node.js** and **NestJS** for managing tasks in a software development context. It includes features for task assignment, priority management, and tracking. The API leverages MongoDB for data persistence and provides endpoints for CRUD operations, including soft deletions and task restoration.
 
-Developed by **Ing. Inés María Oliveros**.
+
 
 ## Features
 
